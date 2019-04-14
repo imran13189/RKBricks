@@ -1,0 +1,101 @@
+﻿
+@{
+    Layout = null;
+}
+
+<link href="~/Scripts/dropzone/basic.css" rel="stylesheet" />
+<link href="~/Scripts/dropzone/dropzone.css" rel="stylesheet" />
+<script src="~/Scripts/dropzone/dropzone.js"></script>
+
+
+
+<!-- End page header -->
+<!-- property area -->
+<div class="content-area submit-property" style="background-color:#FCFCFC;padding-bottom: 26px;">
+    &nbsp;
+    <div class="container">
+        <div class="clearfix">
+            <div class="wizard-container">
+                <div class="wizard-card ct-wizard-orange" id="wizardProperty">
+                    <form action="/api/ProjectAPI/UploadFile" id="frmproject" class="dropzone">
+                        <div class="wizard-header">
+                            <h3>
+                                <b>Add</b> Photos <br>
+                                <small>@*Lorem ipsum dolor sit amet, consectetur adipisicing.*@</small>
+                            </h3>
+                        </div>
+                        <input type="hidden" id="ProjectId" name="ProjectId" value="@ViewBag.ProjectID" />
+                        <div class="fallback">
+                            <input name="file" type="file" multiple />
+                        </div>
+
+                    </form>
+                </div>
+                <!-- End submit form -->
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    Dropzone.options.myAwesomeDropzone = false;
+    Dropzone.autoDiscover = false;
+    var Files;
+    $(document).ready(function () {
+                        $.ajax({
+                            type: "GET",
+                            async: false,
+                            url: '@Url.HttpRouteUrl("DefaultApi",new {controller= "ProjectAPI", action= "GetFiles" })?ProjectId='+ $("#ProjectId").val(),
+                            success: function (data) {
+                                Files = data;
+                            }
+                        });
+
+                         $("#frmproject").dropzone({
+                                addRemoveLinks: true,
+                                dictRemoveFile: "Delete",
+                                accept: function (file, done) {
+                                    console.log(file)
+                                    if ((file.type).toLowerCase() != "image/jpg" &&
+                                        (file.type).toLowerCase() != "image/gif" &&
+                                        (file.type).toLowerCase() != "image/jpeg" &&
+                                        (file.type).toLowerCase() != "image/png"
+                                    ) {
+                                        done("Invalid file");
+                                    }
+                                    else {
+                                        done();
+                                    }
+                                },
+                             init: function () {
+                                 var that = this;
+                                    $.each(Files, function (i, item) {
+
+                                        var mockFile = { name: item.ImgUrl, size: 12345, type: 'image/jpeg' };
+                                        //this.addFile.call(this, mockFile);
+                                        var Url = '@string.Format("{0}://{1}{2}", Request.Url.Scheme, Request.Url.Authority, Url.Content("~/PropertyImages/"))' + item.ImgUrl;
+                                        //this.options.thumbnail.call(this, mockFile, Url);
+                                        debugger;
+                                        that.options.addedfile.call(that, mockFile);
+                                        that.options.thumbnail.call(that, mockFile, Url);
+                                        mockFile.previewElement.classList.add('dz-success');
+                                        mockFile.previewElement.classList.add('dz-complete');
+                                    });
+
+                             },
+                             removedfile: function (file) {
+                                 var name = file.name;
+                                 $.ajax({
+                                     type: 'GET',
+                                     url: '@Url.Action("DeleteFiles","Project")',
+                                     data: "fileId=" + name,
+                                     dataType: 'html'
+                                 });
+                                 var _ref;
+                                 return (_ref = file.previewElement) != null ? _ref.parentNode.removeChild(file.previewElement) : void 0;
+                             }
+                    });
+    });
+
+</script>

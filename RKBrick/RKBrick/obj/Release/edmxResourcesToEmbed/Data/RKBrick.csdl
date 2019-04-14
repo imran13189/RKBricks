@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="RKBrickModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Project">
+    <Key>
+      <PropertyRef Name="ProjectId" />
+    </Key>
+    <Property Name="ProjectId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ImgUrl" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ProjectName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="ProjectFile">
+    <Key>
+      <PropertyRef Name="ProjectFileId" />
+    </Key>
+    <Property Name="ProjectFileId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ImgUrl" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ProjectId" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="RKBrickEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Projects" EntityType="Self.Project" />
+    <EntitySet Name="ProjectFiles" EntityType="Self.ProjectFile" />
+  </EntityContainer>
+</Schema>

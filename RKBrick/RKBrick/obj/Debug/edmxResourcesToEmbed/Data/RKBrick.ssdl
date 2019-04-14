@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="RKBrickModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Project">
+    <Key>
+      <PropertyRef Name="ProjectId" />
+    </Key>
+    <Property Name="ProjectId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ImgUrl" Type="varchar" MaxLength="50" />
+    <Property Name="ProjectName" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="ProjectFiles">
+    <Key>
+      <PropertyRef Name="ProjectFileId" />
+    </Key>
+    <Property Name="ProjectFileId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ImgUrl" Type="varchar" MaxLength="50" />
+    <Property Name="ProjectId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="RKBrickModelStoreContainer">
+    <EntitySet Name="Project" EntityType="Self.Project" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ProjectFiles" EntityType="Self.ProjectFiles" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>
