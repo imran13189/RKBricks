@@ -20,10 +20,10 @@ namespace RKBrick
         }
         protected void Application_BeginRequest()
         {
-            if (!Request.IsSecureConnection)
-            {
-                Response.Redirect(Request.Url.AbsoluteUri.Replace("http://", "https://"));
-            }
+            //if (!Request.IsSecureConnection)
+            //{
+            //    Response.Redirect(Request.Url.AbsoluteUri.Replace("http://", "https://"));
+            //}
             //if (!Request.Url.Host.StartsWith("www") && !Request.Url.IsLoopback)
             //{
             //    UriBuilder builder = new UriBuilder(Request.Url);

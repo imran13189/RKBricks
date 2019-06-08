@@ -1,0 +1,18 @@
+﻿@model List<RKBrick.Models.ProjectFilesModel>
+@{
+    Layout = null;
+}
+
+@foreach (var item in Model)
+{
+ <a href="@Url.Content("~/PropertyImages/")@item.ImgUrl" value="@item.ProjectId" title="@item.ProjectName" data-lightbox-gallery="gallery1"></a>
+                    
+}
+<script>
+    $(document).ready(function () {
+        $('.portfolio-item a').nivoLightbox({
+            effect: 'slideDown',
+            keyboardNav: true,
+        });
+    });
+</script>

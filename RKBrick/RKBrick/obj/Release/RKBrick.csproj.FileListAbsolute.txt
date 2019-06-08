@@ -87,3 +87,4 @@ D:\Projects\RKBricks\RKBrick\RKBrick\obj\Release\RKBrick.csproj.CoreCompileInput
 D:\Projects\RKBricks\RKBrick\RKBrick\obj\Release\RKBrick.csproj.CopyComplete
 D:\Projects\RKBricks\RKBrick\RKBrick\obj\Release\RKBrick.dll
 D:\Projects\RKBricks\RKBrick\RKBrick\obj\Release\RKBrick.pdb
+D:\Projects\RKBricks\RKBrick\RKBrick\obj\Release\RKBrick.csprojAssemblyReference.cache

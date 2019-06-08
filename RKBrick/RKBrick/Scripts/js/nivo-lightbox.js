@@ -68,7 +68,8 @@
 
         },
 
-        showLightbox: function(e){
+        showLightbox: function (e) {
+            debugger;
             var $this = this,
                 currentLink = this.$el;
 
@@ -94,7 +95,8 @@
                 $('.nivo-lightbox-nav').show();
 
 				// Prev
-                $('.nivo-lightbox-prev').off('click').on('click', function(e){
+                $('.nivo-lightbox-prev').off('click').on('click', function (e) {
+                    debugger;
                     e.preventDefault();
                     var index = galleryItems.index(currentLink);
                     currentLink = galleryItems.eq(index - 1);
@@ -104,7 +106,8 @@
                 });
 
                 // Next
-                $('.nivo-lightbox-next').off('click').on('click', function(e){
+                $('.nivo-lightbox-next').off('click').on('click', function (e) {
+                    debugger;
                     e.preventDefault();
                     var index = galleryItems.index(currentLink);
                     currentLink = galleryItems.eq(index + 1);

@@ -60,5 +60,37 @@ namespace RKBrick.Controllers
             return Json(true);
         }
 
+        public ActionResult Gallery()
+        {
+            RKBrickEntities _db = new RKBrickEntities();
+            List<ProjectModel> data = (from m in _db.Projects
+                                       join file in _db.ProjectFiles on m.ProjectId equals file.ProjectId
+                                       select new ProjectModel()
+                                       {
+                                           ProjectName = m.ProjectName,
+                                           ImgUrl = file.ImgUrl,
+                                           ProjectId = m.ProjectId,
+                                           ProjectFileId=file.ProjectFileId
+                                       }).ToList();
+
+            List<ProjectFilesModel> data1= data.GroupBy(x=>x.ProjectName,(key,g)=>new ProjectFilesModel() {ProjectName=key,ImgUrl=g.FirstOrDefault().ImgUrl,ProjectId=g.FirstOrDefault().ProjectId,Files=g.Where(x=>x.ProjectFileId != g.FirstOrDefault().ProjectFileId).ToList() }).ToList();
+
+            return View("_Gallery", data1);
+        }
+
+        public ActionResult _GalleryFiles()
+        {
+            RKBrickEntities _db = new RKBrickEntities();
+            List<ProjectFilesModel> data = (from m in _db.Projects
+                                       join file in _db.ProjectFiles on m.ProjectId equals file.ProjectId
+                                       select new ProjectModel()
+                                       {
+                                           ProjectName = m.ProjectName,
+                                           ImgUrl = file.ImgUrl,
+                                           ProjectId = m.ProjectId
+                                       }).GroupBy(x => x.ProjectName, (key, g) => new ProjectFilesModel() { ProjectName = key, ImgUrl = g.FirstOrDefault().ImgUrl, ProjectId = g.FirstOrDefault().ProjectId }).ToList();
+
+            return View(data);
+        }
     }
 }

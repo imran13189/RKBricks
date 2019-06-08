@@ -1,0 +1,55 @@
+﻿@model List<RKBrick.Models.ProjectFilesModel>
+@{
+    Layout = null;
+    int i = 1;
+}
+
+<!-- Gallery Section -->
+<div id="portfolio">
+    <div class="container">
+        <div class="section-title">
+            <h2>Our Works</h2>
+        </div>
+        <div class="row">
+            <div class="portfolio-items">
+                @foreach (var item in Model)
+                {
+                <div class="col-sm-6 col-md-4 col-lg-4">
+                    <div class="portfolio-item">
+                        <div class="hover-bg">
+                            <a href="@Url.Content("~/PropertyImages/")@item.ImgUrl" value="@item.ProjectId" data-lightbox-gallery="gallery@(i.ToString())">
+                                <div class="hover-text">
+                                    <h4>@item.ProjectName</h4>
+                                </div>
+                                <img src="@Url.Content("~/PropertyImages/")@item.ImgUrl" class="img-responsive" alt="Project Title">
+                            </a>
+                            @foreach (var file in item.Files)
+                            {
+                                <a href="@Url.Content("~/PropertyImages/")@file.ImgUrl" value="@file.ProjectId" data-lightbox-gallery="gallery@(i.ToString())" ></a>
+                            }
+                            </div>
+                    </div>
+                </div>
+                    i++;
+                }
+               
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var Files;
+    var baseURL = '@string.Format("{0}://{1}{2}", Request.Url.Scheme, Request.Url.Authority, Url.Content("~/PropertyImages/"))'
+    var ProjectLink;
+    function GetFiles(projectid) {
+                        $.ajax({
+                            type: "GET",
+                            async: false,
+                            url: '@Url.HttpRouteUrl("DefaultApi",new {controller= "ProjectAPI", action= "GetFiles" })?ProjectId=' + projectid,
+                            success: function (data) {
+                                Files = data;
+                            }
+                        });
+    }
+</script>

@@ -277,7 +277,7 @@
     <Content Include="Views\Home\_Testimonials.cshtml" />
     <Content Include="Views\Home\_Contacts.cshtml" />
     <Content Include="Views\Home\_Footer.cshtml" />
-    <Content Include="Views\Home\_Gallery.cshtml" />
+    <Content Include="Views\Project\_Gallery.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -336,6 +336,7 @@
     <Content Include="Views\Project\Index.cshtml" />
     <Content Include="Views\Project\_ProjectFiles.cshtml" />
     <None Include="Properties\PublishProfiles\RKBricks.pubxml" />
+    <Content Include="Views\Project\_GalleryFiles.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
